@@ -81,12 +81,12 @@ function cardToEmbedBody(card) {
  * @return {string} A single line containing the domain, expansion, and printed position of the card.
  */
 function cardToFooter(card) {
-  const stitchIcon = card.frontFace.stitchIcon
-    ? `${card.frontFace.stitchIcon} • `
+  const domain = card.frontFace.stitchIcon
+    ? `${toTitleCase(card.frontFace.stitchIcon)} • `
     : "";
 
   const expansionData = Object.values(card.prints.printsByID)[0];
   const expansion = getExpansion(expansionData.expansionID).collationName;
 
-  return `${stitchIcon}${expansion} #${expansionData.id}`;
+  return `${domain}${expansion} #${expansionData.id}`;
 }
