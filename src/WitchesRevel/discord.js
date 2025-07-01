@@ -65,3 +65,18 @@ export function cardToStitchIconEmote(card) {
       return process.env.EMOJI_MOONLIGHT;
   }
 }
+
+/**
+ * @param {Object} card A card.
+ * @return {string} The text of that card, rendered with markdown.
+ */
+export function formatCardText(card) {
+  return card.frontFace.text
+    .map((clause) => {
+      if (clause.kind == "unmarked") {
+        return clause.text;
+      }
+      return `**${clause.condition}** ${clause.text}`;
+    })
+    .join("\n");
+}

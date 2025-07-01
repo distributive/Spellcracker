@@ -9,7 +9,11 @@
 
 import { EmbedBuilder } from "discord.js";
 import { getExpansion } from "./api.js";
-import { cardToColor, cardToStitchIconEmote } from "./discord.js";
+import {
+  cardToColor,
+  cardToStitchIconEmote,
+  formatCardText,
+} from "./discord.js";
 import { toTitleCase } from "../Utility/text.js";
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -67,9 +71,9 @@ function cardToEmbedBody(card) {
         .join(" • ")
     : "";
 
-  return `${type}${stitchIcon}${stats ? `\n${stats}` : ""}\n>>> ${
-    card.fullText.frontFace
-  }`;
+  return `${type}${stitchIcon}${
+    stats ? `\n${stats}` : ""
+  }\n>>> ${formatCardText(card)}`;
 }
 
 /**
