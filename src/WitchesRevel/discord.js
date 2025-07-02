@@ -51,7 +51,7 @@ export function cardToColor(card) {
     : card.frontFace.typeLine == "A Resource." ||
       card.frontFace.typeLine == "A Marker."
     ? +process.env.COLOR_INFO
-    : +process.env.COLOR_NEUTRAL;
+    : +process.env.COLOR_NO_DOMAIN;
 }
 
 /**
