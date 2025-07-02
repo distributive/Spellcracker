@@ -66,7 +66,11 @@ function cardToEmbedBody(card) {
   const stats = card.frontFace.value
     ? Object.keys(card.frontFace.value)
         .map((key) => {
-          toTitleCase(key) + ": " + card.frontFace.value[key];
+          return (
+            toTitleCase(key) +
+            ": " +
+            Object.values(card.frontFace.value[key])[0]
+          );
         })
         .join(" • ")
     : "";

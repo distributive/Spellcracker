@@ -48,7 +48,10 @@ export function domainToColor(domainId) {
 export function cardToColor(card) {
   return card.frontFace.stitchIcon
     ? domainToColor(card.frontFace.stitchIcon)
-    : +process.env.COLOR_INFO;
+    : card.frontFace.typeLine == "A Resource." ||
+      card.frontFace.typeLine == "A Marker."
+    ? +process.env.COLOR_INFO
+    : +process.env.COLOR_NEUTRAL;
 }
 
 /**
