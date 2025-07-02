@@ -54,12 +54,12 @@ async function execute(interaction, client) {
 
   const cardName = interaction.options.getString("card");
   const card = getClosestCard(cardName);
-  const aliases = listAliases(closestCard.attributes.title);
+  const aliases = listAliases(card.fullNames.frontFace);
 
   let embed;
   if (aliases && aliases.length > 0) {
     const description = `The aliases for ${
-      card.frontFace.title
+      card.fullNames.frontFace
     }:\n - ${aliases.join("\n- ")}`;
     embed = new EmbedBuilder()
       .setColor(cardToColor(card))
@@ -69,7 +69,7 @@ async function execute(interaction, client) {
   } else {
     embed = new EmbedBuilder()
       .setTitle("No aliases found!")
-      .setDescription(`\`${card.frontFace.title}\` has no aliases.`)
+      .setDescription(`\`${card.fullNames.frontFace}\` has no aliases.`)
       .setColor(+process.env.COLOR_ERROR);
   }
 

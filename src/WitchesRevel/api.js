@@ -57,7 +57,7 @@ async function loadApiData() {
   // Cache cards
   DATA.cards = data.cards;
   data.cards.forEach((card) => {
-    DATA.cards[readId(card.frontFace.title)] = card;
+    DATA.cards[readId(card.fullNames.frontFace)] = card;
   });
 
   // Cache card titles
@@ -65,9 +65,10 @@ async function loadApiData() {
   DATA.normalisedToUnnormalisedCardTitles = {};
   DATA.acronymsToCardIds = {};
   data.cards.forEach((card) => {
-    const normalised = normalise(card.frontFace.title);
+    const normalised = normalise(card.fullNames.frontFace);
     DATA.normalisedCardTitles.push(normalised);
-    DATA.normalisedToUnnormalisedCardTitles[normalised] = card.frontFace.title;
+    DATA.normalisedToUnnormalisedCardTitles[normalised] =
+      card.fullNames.frontFace;
     const acronym = normalised
       .split(/[ ]/)
       .map((s) => s[0])

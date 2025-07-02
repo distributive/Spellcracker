@@ -26,7 +26,7 @@ export function createCardEmbed(card) {
   const url = card.links[0].url;
   const embed = new EmbedBuilder()
     .setColor(cardToColor(card))
-    .setTitle(card.frontFace.title)
+    .setTitle(card.fullNames.frontFace)
     .setURL(url)
     .setDescription(cardToEmbedBody(card))
     .setThumbnail(card.images[0].frontFace.scale3x)
@@ -44,7 +44,7 @@ export function createCardImageEmbed(card) {
   const url = card.links[0].url;
   const embed = new EmbedBuilder()
     .setColor(cardToColor(card))
-    .setTitle(card.frontFace.title)
+    .setTitle(card.fullNames.frontFace)
     .setURL(url)
     .setImage(card.images[0].frontFace.scale3x);
   return embed;
