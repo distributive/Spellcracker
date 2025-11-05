@@ -90,7 +90,7 @@ function cardToFooter(card) {
     : "";
 
   const expansionData = Object.values(card.prints.printsByID)[0];
-  const expansion = getExpansion(expansionData.expansionID).collationName;
+  const expansion = getExpansion(expansionData[0].expansionID).collationName;
 
   return `${domain}${expansion} #${expansionData.id}`;
 }
