@@ -54,6 +54,18 @@ export async function init() {
 async function loadApiData() {
   const data = await fetchData(`${process.env.API_URL}cards/all.json`);
 
+  // Cache expansion data
+  DATA.expansions = {};
+  data.expansions.forEach((expansion) => {
+    DATA.expansions[expansion.id] = expansion;
+  });
+
+  // Remove cards that do not have an associated expansion
+  data.cards = data.cards.filter((card) => {
+    const expansionData = Object.values(card.prints.printsByID)[0][0];
+    return getExpansion(expansionData.expansionID) != null;
+  })
+
   // Cache cards
   DATA.cards = data.cards;
   data.cards.forEach((card) => {
@@ -88,12 +100,6 @@ async function loadApiData() {
     } else {
       DATA.mappedCardTitles[char] = [title];
     }
-  });
-
-  // Cache expansion data
-  DATA.expansions = {};
-  data.expansions.forEach((expansion) => {
-    DATA.expansions[expansion.id] = expansion;
   });
 }
 
