@@ -58,21 +58,21 @@ export function createCardImageEmbed(card) {
  * @return {string} A multiline string containing the stats and game text of the card.
  */
 function cardToEmbedBody(card) {
-  const type = card.frontFace.typeLine;
+  const type = card.frontFace.typeLine.rawValue;
 
   const iconEmote = cardToStitchIconEmote(card);
   const stitchIcon = iconEmote ? ` (${iconEmote})` : "";
 
   const stats = card.frontFace.value
     ? Object.keys(card.frontFace.value)
-        .map((key) => {
-          return (
-            toTitleCase(key) +
-            ": " +
-            Object.values(card.frontFace.value[key])[0]
-          );
-        })
-        .join(" • ")
+      .map((key) => {
+        return (
+          toTitleCase(key) +
+          ": " +
+          Object.values(card.frontFace.value[key])[0]
+        );
+      })
+      .join(" • ")
     : "";
 
   return `${type}${stitchIcon}${
@@ -89,8 +89,8 @@ function cardToFooter(card) {
     ? `${toTitleCase(card.frontFace.stitchIcon)} • `
     : "";
 
-  const expansionData = Object.values(card.prints.printsByID)[0];
-  const expansion = getExpansion(expansionData[0].expansionID).collationName;
+  const expansionData = Object.values(card.prints.printsByID)[0][0];
+  const expansion = getExpansion(expansionData.expansionID).collationName;
 
   return `${domain}${expansion} #${expansionData.id}`;
 }
