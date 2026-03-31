@@ -59,7 +59,7 @@ async function parseInlineCommands(message) {
   const { client, content } = message;
 
   const filteredContent = content.replace(/(?<!\\)```[\s\S]*?```/g, ""); // Ignore code blocks
-  const regex = /\[\[.*?\]\]|\{\{.*?\}\}|<<.*?>>/g; // Find inline commands
+  const regex = /\[\[.*?\]\]|\{\{.*?\}\}/g; // Find inline commands
   const matches = filteredContent.match(regex);
 
   // Ignore messages with no commands
